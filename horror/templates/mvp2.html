@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="https://via.placeholder.com/70x70">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mvp.css') }}">
+
+    <meta charset="utf-8">
+    <meta name="description" content="My description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+
+    <style>
+        .multicolortext {
+          background-image: linear-gradient(to left, violet, indigo, green, blue,  orange, red);
+          -webkit-background-clip: text;
+          -moz-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+
+      </style>
+
+    <title>My title</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="/"><img alt="Logo" src="https://via.placeholder.com/200x70?text=Logo" height="70"></a>
+            <ul>
+                <li><a href="#"> Home</a></li>
+                <li><a href="#">About</a></li>
+
+            </ul>
+        </nav>
+        <h3>Page Heading</h3>
+    </header>
+
+
+
+    <section>
+
+<div class='wrapper'>
+            <button type="submit" class="mine btn btn-default">Tell me my HorrorScope! NOW!!</button>
+
+
+
+</div>
+    </section>
+<section>
+    <h2  class='result multicolortext'></h2>
+</section>
+
+
+</body>
+
+<script>
+    $(document).ready(function(){
+      $('.wrapper').on('click', '.mine', function(){
+         $.ajax({
+          url: "/yo",
+          type: "get",
+          success: function(response) {
+            $(".result").html('<p>'+response.result.toString()+'</p>');
+          },
+         });
+      });
+    });
+ </script>

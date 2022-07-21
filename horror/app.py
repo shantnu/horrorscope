@@ -1,11 +1,12 @@
 from flask import Flask, redirect, render_template, \
      request, url_for, jsonify
 import random
-
-
+from horror import horror_list
+from flask_s3 import FlaskS3
 
 app = Flask(__name__)
-
+app.config['FLASKS3_BUCKET_NAME'] = 'docker-on-aws-shantnu'
+s3 = FlaskS3(app)
 
 @app.route("/")
 def hello_from_root():
@@ -14,7 +15,7 @@ def hello_from_root():
 
 @app.route("/yo")
 def yo():
-    data = "hello random the rain in spain falls mainly on the plain" + str(random.randrange(1, 1000))
+    data = random.choice(horror_list)
     return jsonify({"result": data })
 
 
@@ -28,4 +29,4 @@ def resource_not_found(e):
     return make_response(jsonify(error='Not found!'), 404)
 
 
-app.run(debug=True)
+#app.run(debug=True)
